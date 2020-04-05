@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',function () {return redirect()->route('article.index');});
+Route::get('/laravel',['uses' => 'WelcomeController@index', 'as' => 'laravel']);
+Route::resource('/article', 'Article');
+Route::get('/{any}',function () {
+	return redirect()->route('article.index');
+})->where('any', '.*');
+
